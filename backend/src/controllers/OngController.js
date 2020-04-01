@@ -1,4 +1,4 @@
-const crypto = require("crypto"); // posso usar um método para criar uma string de caracteres aleatórios
+const generateUniqueId = require("../utils/generateUniqueId");
 const connection = require("../database/connection");
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
   async create(req, res) {
     const { name, email, whatsapp, city, uf } = req.body;
 
-    const id = crypto.randomBytes(4).toString("HEX"); // vai gerar um ID com 4 hexadecimais aleatórios
+    const id = generateUniqueId(); // separei essa função em um único arquivo pq se em algum outro lugar da aplicação eu tbm for precisar de um Id unico eu tenho esse codigo isolado em um unico lugar ---> mais fácil manutenção.
 
     //tabela que quero inserir dados
     await connection("ongs").insert({

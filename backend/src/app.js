@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { errors } = require('celebrate')
 const routes = require('./routes');
 
 const app = express();
@@ -7,8 +8,9 @@ const app = express();
 app.use(cors()); // quando for para produção preciso alterar para o endereço da aplicação, ex: http://meuapp.com
 app.use(express.json()); //importante que venha antes das rotas! "converte json em js"
 app.use(routes);
+app.use(errors());
 
-app.listen(3333)
+module.exports = app;
 
 
 // MÉTODOS HTTP
@@ -26,3 +28,5 @@ app.listen(3333)
 // DRIVER: SELECT * FROM users 
 // QUERY BUILDER (KNEX): table('users').select('*').where()
 
+// JOI biblioteca de validação para JS criada pela Hapi, o CELEBRATE biblioteca que integra o JOI com o framework Express
+// Na documentação do JOI tem todos os dados de validação 
